@@ -1,0 +1,28 @@
+COMMERCIAL LICENSE AGREEMENT
+
+Project: Clean Stack Template
+Snapshot Commit: 6321353d78648d2aa1de0a9abfedb03dd05f43b2
+Date: <FILL IN DATE>
+Licensor (Seller): <SELLER NAME / ENTITY>
+Licensee (Buyer): <BUYER NAME / ENTITY>
+
+1. Grant. Licensor grants Licensee a perpetual, worldwide, irrevocable, transferable, sublicensable, royalty-free license to use, modify, create derivative works of, display, distribute, and commercialize the Project.
+2. Exclusivity. (Select one and delete the other before signing)
+   [ ] Exclusive – Licensor will not reuse or resell this codebase.
+   [ ] Non-Exclusive – Licensor retains the right to reuse and resell.
+3. Third-Party Components. Included dependencies remain under their original open-source licenses. Licensee must comply with those terms.
+4. Attribution. (Optional) If required, attribution must include: "Based on Clean Stack Template." Remove this clause if not desired.
+5. No Warranty. Project provided "AS IS" without warranties of any kind (express or implied).
+6. Limitation of Liability. Licensor is not liable for any indirect, incidental, consequential, or special damages.
+7. Indemnification. Licensee indemnifies Licensor against claims arising from Licensee's use or distribution.
+8. Support. No ongoing support is included unless a separate support agreement is executed.
+9. Governing Law. <JURISDICTION>
+10. Entire Agreement. This document constitutes the entire agreement regarding the licensed Project.
+11. Amendment. Any changes must be in writing signed by both parties.
+12. Execution. This may be executed electronically in counterparts.
+
+Signatures:
+Licensor: ______________________________  Date: ____________
+Licensee: ______________________________  Date: ____________
+
+(End)

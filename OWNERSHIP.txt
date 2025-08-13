@@ -1,0 +1,23 @@
+PROJECT OWNERSHIP TRANSFER
+
+Project: Clean Stack Template
+Snapshot Commit: 6321353d78648d2aa1de0a9abfedb03dd05f43b2
+Date of Transfer: <FILL IN DATE>
+
+Seller (Assignor): <SELLER NAME / ENTITY>
+Buyer (Assignee): <BUYER NAME / ENTITY>
+
+1. Assignment. Seller assigns all right, title, and interest in the Project codebase (including all source files, build scripts, configuration, and related documentation) as it exists at the Snapshot Commit to Buyer.
+2. Scope. This assignment excludes third‑party dependencies and their respective licenses; those remain governed by their original licenses.
+3. Warranties. Project is provided "AS IS" without warranties. Seller does not guarantee fitness for a particular purpose or absence of defects.
+4. Indemnity. Buyer assumes all responsibility for future use, compliance, and distribution.
+5. Confidential / Secrets. No proprietary secrets or credentials are included. Buyer must provision fresh API keys and environment values.
+6. Future Updates. Post-transfer, Seller has no obligation to provide maintenance or enhancements unless separately agreed in writing.
+7. Further Assurances. Seller will execute additional documents reasonably necessary to perfect this transfer upon request.
+
+Signatures:
+
+Seller Signature: _________________________  Date: ____________
+Buyer Signature:  _________________________  Date: ____________
+
+Optional Notary / Witness: ___________________________________________________
