@@ -11,22 +11,33 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm'
+      - name: Enable corepack
+        shell: bash
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.14.0 --activate || echo "corepack prepare fallback"
       - name: Install pnpm (action)
         uses: pnpm/action-setup@v4
         with:
           version: 10.14.0
           run_install: false
-      - name: Enable corepack (belt & suspenders)
+      - name: Fallback global pnpm (if still missing)
+        shell: bash
         run: |
-          corepack enable
-          corepack prepare pnpm@10.14.0 --activate || echo "corepack prepare fallback"
+          if ! command -v pnpm >/dev/null 2>&1; then
+            echo "pnpm still missing; installing globally via npm"
+            npm i -g pnpm@10.14.0
+          fi
       - name: Verify toolchain
+        shell: bash
         run: |
-          which pnpm || echo "pnpm not in PATH"
-          pnpm -v || echo "pnpm version failed"
+          echo "PATH=$PATH"
+          ls -l $(which node)
+          which pnpm || echo "pnpm not in PATH (pre-install)"
+          pnpm -v || echo "pnpm version failed (expected before install if action failed)"
           node -v
-          echo "Store path:" $(pnpm store path || true)
+          echo "Corepack list:" || true
+          corepack list 2>/dev/null || true
       - name: Setup pnpm store cache
         uses: actions/cache@v4
         with:
@@ -35,12 +46,17 @@ jobs:
           restore-keys: |
             pnpm-store-${{ runner.os }}-
       - name: Install dependencies
+        shell: bash
         run: pnpm install --frozen-lockfile
       - name: Lint
+        shell: bash
         run: pnpm lint --max-warnings=0
       - name: Typecheck
+        shell: bash
         run: pnpm typecheck
       - name: Build
+        shell: bash
         run: pnpm build
       - name: Tests (if present)
+        shell: bash
         run: pnpm test --if-present
