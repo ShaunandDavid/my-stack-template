@@ -12,14 +12,12 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.14.0
-      - name: Print versions
+      - name: Enable corepack & install pnpm
         run: |
-          node -v
+          corepack enable
+          corepack prepare pnpm@10.14.0 --activate
           pnpm -v
+          node -v
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Lint
