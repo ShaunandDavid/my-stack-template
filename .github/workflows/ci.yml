@@ -6,57 +6,31 @@ jobs:
     env:
       HUSKY: 0 # skip git hooks in CI
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Enable corepack
-        shell: bash
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.14.0 --activate || echo "corepack prepare fallback"
-      - name: Install pnpm (action)
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:
           version: 10.14.0
           run_install: false
-      - name: Fallback global pnpm (if still missing)
-        shell: bash
-        run: |
-          if ! command -v pnpm >/dev/null 2>&1; then
-            echo "pnpm still missing; installing globally via npm"
-            npm i -g pnpm@10.14.0
-          fi
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
       - name: Verify toolchain
-        shell: bash
         run: |
           echo "PATH=$PATH"
-          ls -l $(which node)
-          which pnpm || echo "pnpm not in PATH (pre-install)"
-          pnpm -v || echo "pnpm version failed (expected before install if action failed)"
-          node -v
-          echo "Corepack list:" || true
-          corepack list 2>/dev/null || true
-      - name: Setup pnpm store cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: |
-            pnpm-store-${{ runner.os }}-
+          command -v node && node -v
+          command -v pnpm && pnpm -v
+          echo "pnpm store path: $(pnpm store path)"
       - name: Install dependencies
-        shell: bash
         run: pnpm install --frozen-lockfile
       - name: Lint
-        shell: bash
         run: pnpm lint --max-warnings=0
       - name: Typecheck
-        shell: bash
         run: pnpm typecheck
       - name: Build
-        shell: bash
         run: pnpm build
       - name: Tests (if present)
-        shell: bash
         run: pnpm test --if-present
