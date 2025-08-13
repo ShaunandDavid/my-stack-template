@@ -28,6 +28,8 @@ cp .env.example .env.local
 # Edit .env.local with your values
 ```
 
+If using a database, also create a `.env` (server) with `DATABASE_URL`.
+
 4. **Start development server:**
 
 ```bash
@@ -86,6 +88,15 @@ The project automatically:
 - Formats code with Prettier
 - Fixes ESLint issues
 - Type-checks TypeScript
+
+### Database (Optional)
+
+```bash
+pnpm db:generate   # Generate Prisma client
+pnpm db:push       # Push schema to database (development)
+pnpm db:migrate    # Create & apply a migration (prompted)
+pnpm db:studio     # Open Prisma Studio UI
+```
 
 ## Next Steps
 

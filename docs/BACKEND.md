@@ -115,6 +115,15 @@ npm install prisma @prisma/client
 npx prisma init
 ```
 
+Generated `prisma/schema.prisma` already contains a `User` model. Adjust as needed.
+
+Run generation & push:
+
+```bash
+pnpm db:generate
+pnpm db:push
+```
+
 **Drizzle (Alternative):**
 
 ```bash
@@ -134,7 +143,7 @@ JWT_SECRET="your-secret-key"
 
 Update your frontend to use the backend API:
 
-```typescript
+````typescript
 // lib/api.ts
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
@@ -153,6 +162,16 @@ export const api = {
     return response.json();
   },
 };
+
+## Logging
+
+Use the provided Pino logger in `src/lib/logger.ts`:
+
+```typescript
+import { logger } from "@/lib/logger";
+logger.info("Server started");
+````
+
 ```
 
 ## Authentication (Optional)
@@ -163,3 +182,4 @@ Consider these auth solutions:
 - **Clerk** - Complete user management
 - **Supabase Auth** - If using Supabase as database
 - **Custom JWT** - For maximum control
+```

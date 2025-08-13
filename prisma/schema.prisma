@@ -1,0 +1,19 @@
+// Prisma schema (optional). Safe to delete if not using a database yet.
+// Run `pnpm db:push` to sync this schema to your Railway Postgres.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

@@ -25,8 +25,8 @@ const eslintConfig = [
       "storybook-static/**",
       "coverage/**",
       "dist/**",
-    ]
-  }
+    ],
+  },
 ];
 
 export default eslintConfig;
