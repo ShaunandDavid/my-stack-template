@@ -8,10 +8,10 @@ Create API routes in `src/app/api/`:
 
 ```typescript
 // src/app/api/hello/route.ts
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 
 export async function GET() {
-  return NextResponse.json({ message: "Hello from API!" });
+  return NextResponse.json({ message: 'Hello from API!' });
 }
 ```
 
@@ -47,8 +47,8 @@ npm install -D typescript ts-node nodemon
 
 ```typescript
 // backend/src/index.ts
-import express from "express";
-import cors from "cors";
+import express from 'express';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -56,8 +56,8 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-app.get("/api/health", (req, res) => {
-  res.json({ status: "OK", timestamp: new Date().toISOString() });
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 app.listen(port, () => {

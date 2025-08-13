@@ -54,16 +54,16 @@ npx shadcn@latest add form
 Create `.stories.ts` files for your components in `src/stories/`:
 
 ```typescript
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 
 export default {
-  title: "UI/Button",
+  title: 'UI/Button',
   component: Button,
 };
 
 export const Default = {
   args: {
-    children: "Click me",
+    children: 'Click me',
   },
 };
 ```
@@ -73,10 +73,10 @@ export const Default = {
 Add E2E tests in the `tests/` directory:
 
 ```typescript
-import { test, expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
-test("homepage loads", async ({ page }) => {
-  await page.goto("/");
+test('homepage loads', async ({ page }) => {
+  await page.goto('/');
   await expect(page).toHaveTitle(/My App/);
 });
 ```
