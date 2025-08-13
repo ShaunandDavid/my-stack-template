@@ -12,12 +12,28 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Enable corepack & install pnpm
+      - name: Install pnpm (action)
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+          run_install: false
+      - name: Enable corepack (belt & suspenders)
         run: |
           corepack enable
-          corepack prepare pnpm@10.14.0 --activate
-          pnpm -v
+          corepack prepare pnpm@10.14.0 --activate || echo "corepack prepare fallback"
+      - name: Verify toolchain
+        run: |
+          which pnpm || echo "pnpm not in PATH"
+          pnpm -v || echo "pnpm version failed"
           node -v
+          echo "Store path:" $(pnpm store path || true)
+      - name: Setup pnpm store cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Lint
