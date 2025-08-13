@@ -3,14 +3,30 @@ on: [push, pull_request]
 jobs:
   web:
     runs-on: ubuntu-latest
+    env:
+      HUSKY: 0 # skip git hooks in CI
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version: 20, cache: 'pnpm' }
-      - uses: pnpm/action-setup@v4
-        with: { version: 9 }
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm typecheck
-      - run: pnpm build
-      - run: pnpm test --if-present
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.14.0
+      - name: Print versions
+        run: |
+          node -v
+          pnpm -v
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint --max-warnings=0
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Build
+        run: pnpm build
+      - name: Tests (if present)
+        run: pnpm test --if-present
